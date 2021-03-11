@@ -59,3 +59,11 @@ body {
     color: #fff;
     font-size: 2.5rem;
 }
+
+.default::after {
+    content: '0';
+}
+
+.remove {
+    display: none;
+}

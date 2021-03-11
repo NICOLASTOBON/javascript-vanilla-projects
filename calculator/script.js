@@ -7,13 +7,16 @@ class Calculator {
     }
 
     clear() {
-        this.currentOperand = ''
+        this.currentOperand = '0'
         this.previousOperand = ''
         this.operation = undefined
     }
 
     delete() {
         this.currentOperand = this.currentOperand.toString().slice(0, -1)
+        if (this.currentOperand === '') {
+            this.currentOperand = '0'
+        }
     }
 
     appendNumber(number) {
@@ -80,7 +83,13 @@ class Calculator {
     }
 
     updateDisplay() {
+
+        if (this.currentOperand === '') {
+            this.currentOperand = '0'
+        }
+
         this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand)
+
         if (this.operation != null) {
             this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
         } else {
@@ -96,6 +105,8 @@ const deleteButton = document.querySelector('[data-delete]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const previousOperandTextElement = document.querySelector('[data-previous-operand]')
 const currentOperandTextElement = document.querySelector('[data-current-operand]')
+
+currentOperandTextElement.innerText = '0'
 
 
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
